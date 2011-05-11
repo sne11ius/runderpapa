@@ -1,2 +1,4 @@
+war/WEB-INF/classes
 war/WEB-INF/deploy
 war/gxt
+war/runderpapa/*.gwt.rpc

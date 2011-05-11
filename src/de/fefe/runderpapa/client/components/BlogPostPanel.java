@@ -1,7 +1,6 @@
 package de.fefe.runderpapa.client.components;
 
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 
@@ -23,14 +22,6 @@ public class BlogPostPanel extends FormPanel {
 		initComponents();
 	}
 	
-	/*
-	@Override
-	protected void onRender(Element parent, int index) {
-		super.onRender(parent, index);
-		initComponents();
-	}
-	*/
-	
 	private void initComponents() {
 		remove(postText);
 		remove(commentDisplay);
@@ -43,6 +34,8 @@ public class BlogPostPanel extends FormPanel {
 		this.add(postText);
 		this.add(commentDisplay);
 		this.add(postCommentPanel);
+		
+		layout();
 	}
 
 	public void reload() {
