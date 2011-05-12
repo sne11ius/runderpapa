@@ -1,6 +1,7 @@
 package de.fefe.runderpapa.client.components;
 
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 
@@ -9,29 +10,36 @@ import de.fefe.runderpapa.shared.BlogPost;
 
 public class BlogPostPanel extends FormPanel {
 	
-	private BlogPost post = null;
+	private int postId = 0;
 	private BlogPostServiceAsync blogPostServiceAsync = null;
 	
 	private HTML postText = null;
 	private CommentDisplay commentDisplay = null;
 	private PostCommentPanel postCommentPanel = null;
 		
-	public BlogPostPanel(BlogPost post, BlogPostServiceAsync blogPostServiceAsync) {
-		this.post = post;
+	public BlogPostPanel(int postId, BlogPostServiceAsync blogPostServiceAsync) {
+		this.postId = postId;
 		this.blogPostServiceAsync = blogPostServiceAsync;
-		initComponents();
 	}
 	
-	private void initComponents() {
-		remove(postText);
-		remove(commentDisplay);
-		remove(postCommentPanel);
+	@Override
+	protected void onRender(Element target, int index) {
+		super.onRender(target, index);
+		reload();
+	}
+	
+	private void initComponents(BlogPost blogPost) {
 		
-		postText = new HTML(post.getText());
-		commentDisplay = new CommentDisplay(post.getPostId(), post.getComments());
-		postCommentPanel = new PostCommentPanel(this, post.getPostId(), blogPostServiceAsync);
+		if (postText != null) remove(postText);
+		if (commentDisplay != null) remove(commentDisplay);
+		if (postCommentPanel != null) remove(postCommentPanel);
+		
+		postText = new HTML(blogPost.getText());
+		commentDisplay = new CommentDisplay(blogPost.getPostId(), blogPost.getComments());
+		postCommentPanel = new PostCommentPanel(this, blogPost.getPostId(), blogPostServiceAsync);
 		
 		this.add(postText);
+		this.add(new HTML("<br><iframe src=\"http://www.facebook.com/plugins/like.php?href=http://fettemama.org/post?id=" + blogPost.getPostId() + "\" scrolling=\"no\" style=\"border:none; width: 500px; height:80px\"><iframe>"));
 		this.add(commentDisplay);
 		this.add(postCommentPanel);
 		
@@ -39,12 +47,11 @@ public class BlogPostPanel extends FormPanel {
 	}
 
 	public void reload() {
-		blogPostServiceAsync.getPost(post.getPostId(), new AsyncCallback<BlogPost>() {
+		blogPostServiceAsync.getPost(postId, new AsyncCallback<BlogPost>() {
 			
 			@Override
-			public void onSuccess(BlogPost result) {
-				post = result;
-				initComponents();
+			public void onSuccess(BlogPost blogPost) {
+				initComponents(blogPost);
 			}
 			
 			@Override

@@ -1,6 +1,7 @@
 package de.fefe.runderpapa.server;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -19,7 +20,13 @@ import de.fefe.runderpapa.shared.BlogPostComment;
 public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPostService {
 	
 	private static final Log LOG = LogFactory.getLog(BlogPostServiceImpl.class);
-	
+
+
+	@Override
+	public int getMaxPostId() throws IOException {
+		return new FetteMamaScraper().getMaxPostId();
+	}
+
 	@Override
 	public List<BlogPost> getPosts() throws IOException {
 		return new FetteMamaScraper().getBlogPosts();

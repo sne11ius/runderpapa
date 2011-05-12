@@ -15,6 +15,8 @@ import de.fefe.runderpapa.shared.BlogPostComment;
 @RemoteServiceRelativePath("greet")
 public interface BlogPostService extends RemoteService {
 	
+	int getMaxPostId() throws IOException;
+	
 	List<BlogPost> getPosts() throws IllegalArgumentException, IOException;
 	BlogPost getPost(int index) throws IOException;
 	

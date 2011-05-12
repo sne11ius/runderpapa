@@ -17,5 +17,7 @@ public interface BlogPostServiceAsync {
 	void getPost(int index, AsyncCallback<BlogPost> callback);
 
 	void addComment(int postId, BlogPostComment comment, AsyncCallback<Void> callback);
+
+	void getMaxPostId(AsyncCallback<Integer> callback);
 	
 }
