@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="RunderPapa" basedir="." default="default">
+
+	<target name="default" depends="buildwar,deploy"></target>
+
+	<target name="buildwar">
+		<war basedir="war" destfile="RunderPapa.war" webxml="war/WEB-INF/web.xml">
+			<exclude name="WEB-INF/**" />
+			<webinf dir="war/WEB-INF/">
+				<include name="**/*.jar" />
+			</webinf>
+		</war>
+	</target>
+
+	<target name="deploy">
+		<copy file="RunderPapa.war" todir="." />
+	</target>
+</project>
