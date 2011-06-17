@@ -36,7 +36,7 @@ public class CommentDisplay extends FieldSet {
 	    
 	    for (BlogPostComment comment : comments) {
 	    	ContentPanel commentPanel = new ContentPanel();
-	    	commentPanel.setHeading(comment.getUsername() + " says:");
+	    	commentPanel.setHeading("<a href='../RESTFettemama/user/" + comment.getUsername() + "'>" + comment.getUsername() + "</a> says:");
 	    	commentPanel.add(new Label(comment.getComment()));
 	    	add(commentPanel);
 	    }

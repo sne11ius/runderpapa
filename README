@@ -2,8 +2,14 @@ runderpapa: gxt-wrapper for fettemama.org
 
 how to get it running for dummies:
  - get eclipse including the google plugin stuff (gwt 2.3.0)
- - import this project into the workspace of your choice
  - get and setup gxt 2.2.3
- - fix the project setup (some absolute dirs are referenced)
+ - import this project into the workspace of your choice
+ - fix the project setup (maybe some absolute dirs are referenced)
  - run the shit
  - don't worry if it takes ages to load. its java+google :)
+ 
+ build this shit:
+ - run gwt compile
+ - rebuild ./war/WEB-INF/lib/RunderPapa.jar from ./src dir
+ - run warbuilder.xml with ant
+ - deploy ./RunderPapa.war

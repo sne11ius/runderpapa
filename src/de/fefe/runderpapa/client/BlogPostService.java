@@ -12,13 +12,15 @@ import de.fefe.runderpapa.shared.BlogPostComment;
 /**
  * The client side stub for the RPC service.
  */
-@RemoteServiceRelativePath("greet")
+@RemoteServiceRelativePath("BlogPostService")
 public interface BlogPostService extends RemoteService {
 	
 	int getMaxPostId() throws IOException;
 	
 	List<BlogPost> getPosts() throws IllegalArgumentException, IOException;
 	BlogPost getPost(int index) throws IOException;
+	
+	List<Integer> searchPost(String text) throws IOException;
 	
 	void addComment(int postId, BlogPostComment comment);
 	

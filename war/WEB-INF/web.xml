@@ -7,13 +7,13 @@
   
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
+    <servlet-name>BlogPostService</servlet-name>
     <servlet-class>de.fefe.runderpapa.server.BlogPostServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/runderpapa/greet</url-pattern>
+    <servlet-name>BlogPostService</servlet-name>
+    <url-pattern>/runderpapa/BlogPostService</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

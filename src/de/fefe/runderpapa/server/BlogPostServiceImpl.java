@@ -1,7 +1,7 @@
 package de.fefe.runderpapa.server;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -44,5 +44,19 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 		} catch (Exception e) {
 			LOG.error(e);
 		}
+	}
+
+	@Override
+	public List<Integer> searchPost(String text) throws IOException {
+		List<Integer> result = new LinkedList<Integer>();
+		List<BlogPost> allPosts = new FetteMamaScraper().getBlogPosts();
+		
+		for (BlogPost post : allPosts) {
+			if (post.getText().contains(text)) {
+				result.add(post.getPostId());
+			}
+		}
+		
+		return result;
 	}
 }

@@ -24,7 +24,7 @@ public class MainPanel extends VerticalPanel {
 		setScrollMode(Scroll.AUTO);
 		setSpacing(10);
 		
-		add(new IntroPanel());
+		add(new IntroPanel(postsToShow, blogPostService));
 		
 		showPosts(postsToShow);
 	}

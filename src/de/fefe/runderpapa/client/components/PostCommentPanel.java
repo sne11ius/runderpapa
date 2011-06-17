@@ -11,7 +11,6 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.MarginData;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.fefe.runderpapa.client.BlogPostServiceAsync;
@@ -25,7 +24,7 @@ public class PostCommentPanel extends FieldSet {
 	private final TextField<String> nickname = new TextField<String>();
 	private final TextField<String> comment = new TextField<String>();
 	private final Button sendButton = new Button("post your comment");
-	private BlogPostPanel blogPostPanel = null;;
+	private BlogPostPanel blogPostPanel = null;
 	
 	public PostCommentPanel(BlogPostPanel blogPostPanel, int postId, BlogPostServiceAsync blogPostServiceAsync) {
 		this.blogPostPanel = blogPostPanel;
@@ -61,7 +60,7 @@ public class PostCommentPanel extends FieldSet {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						MessageBox.info("Post comment", "I wasn't in ur fettemama.org, posting no comment: " + caught.getMessage(), new Listener<MessageBoxEvent>() {
+						MessageBox.info("Post comment", "I failed." + caught.getMessage(), new Listener<MessageBoxEvent>() {
 							@Override
 							public void handleEvent(MessageBoxEvent be) {
 								sendButton.enable();
@@ -71,24 +70,14 @@ public class PostCommentPanel extends FieldSet {
 
 					@Override
 					public void onSuccess(Void result) {
-						MessageBox.info("Post comment", "I was in ur fettemama.org, posting your comment.", new Listener<MessageBoxEvent>() {
-							@Override
-							public void handleEvent(MessageBoxEvent be) {
-								sendButton.enable();
-								blogPostPanel.reload();
-							}
-						});
+						sendButton.enable();
+						blogPostPanel.reload();
 					}
 					
 				});
 			}
 		});
 	    add(sendButton, new MarginData(0, 0, 0, 80));
-	}
-
-	@Override
-	protected void onRender(Element parent, int index) {
-		super.onRender(parent, index);
 	}
 	
 }

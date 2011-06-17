@@ -30,15 +30,14 @@ public class FetteMamaScraper {
 
 	public int getMaxPostId() throws MalformedURLException, IOException {
 		Document mainPage = Jsoup.parse(new URL(URL), TIMEOUT);
-		String href = mainPage.getElementsByTag(TAG_LINK).get(2).attr(ATTRIBUTE_HREF);
+		String href = mainPage.getElementsByTag(TAG_LINK).get(3).attr(ATTRIBUTE_HREF);
 		
 		return Integer.parseInt(href.substring(href.indexOf("=") + 1));
 	}
 	
 	public List<BlogPost> getBlogPosts() throws MalformedURLException, IOException {
 		List<BlogPost> posts = new LinkedList<BlogPost>();
-		for (int postId = getMaxPostId(); postId > 200; --postId) {
-			// LOG.info("reading post #" + postId);
+		for (int postId = getMaxPostId(); postId > 0; --postId) {
 			posts.add(getBlogPost(postId));
 		}
 		return posts;

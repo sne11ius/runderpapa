@@ -12,7 +12,7 @@ import de.fefe.runderpapa.client.components.MainPanel;
 
 public class RunderPapa implements EntryPoint {
 	
-	private static final int POSTS_TO_SHOW = 10;
+	private static final int POSTS_TO_SHOW = 20;
 	
 	private final BlogPostServiceAsync blogPostService = GWT.create(BlogPostService.class);
 
