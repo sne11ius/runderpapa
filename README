@@ -1,5 +1,8 @@
 runderpapa: gxt-wrapper for fettemama.org
 
+updates:
+2011-06-27: now mit blacklist(tm)
+
 how to get it running for dummies:
  - get eclipse including the google plugin stuff (gwt 2.3.0)
  - get and setup gxt 2.2.3
@@ -13,3 +16,4 @@ how to get it running for dummies:
  - rebuild ./war/WEB-INF/lib/RunderPapa.jar from ./src dir
  - run warbuilder.xml with ant
  - deploy ./RunderPapa.war
+ 

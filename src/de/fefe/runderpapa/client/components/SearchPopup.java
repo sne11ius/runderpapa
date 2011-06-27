@@ -26,7 +26,7 @@ public class SearchPopup extends Popup {
 	private static final int HEIGHT_EXTENDED = 600;
 	
 	private static final VerticalPanel content = new VerticalPanel();
-	
+
 	public SearchPopup(BlogPostServiceAsync blogPostService) {
 		setStyleAttribute("background-color", "#DFE8F6");
 		add(new SearchPanel(this));
@@ -40,6 +40,7 @@ public class SearchPopup extends Popup {
 		setShadow(true);
 		setAutoHide(false);
 
+		@SuppressWarnings("unused")
 		Resizable resizable = new Resizable(this);
 	}
 	

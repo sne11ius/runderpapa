@@ -18,7 +18,7 @@ public class CommentBlacklistChecker {
 	private static final Log LOG = LogFactory.getLog(CommentBlacklistChecker.class);
 	
 	private static final String BLACKLIST_FILENAME = "blacklist";
-	private static final int MIN_STRING_DISTANCE = 3;
+	private static final int MIN_STRING_DISTANCE = 2;
 	private static final String PREFORMAT_REGEX = "[^\\w \\xC0-\\xFF]";
 	
 	public static boolean isCommentAllowed(final BlogPostComment comment) throws IOException {
