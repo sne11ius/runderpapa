@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.fx.Resizable;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Popup;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -38,6 +39,8 @@ public class SearchPopup extends Popup {
 		setBorders(true);
 		setShadow(true);
 		setAutoHide(false);
+
+		Resizable resizable = new Resizable(this);
 	}
 	
 	@Override

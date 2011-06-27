@@ -40,6 +40,16 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 	@Override
 	public void addComment(int postId, BlogPostComment comment) {
 		try {
+			if (!CommentBlacklistChecker.isCommentAllowed(comment)) {
+				LOG.info("Discarding blacklisted comment.\nUsername: " + comment.getUsername() + "\nComment: " + comment.getComment());
+				return;
+			}
+		} catch (IOException exception) {
+			LOG.error(exception);
+			return;
+		}
+
+		try {
 			new FetteMamaTelnetClient().addComment(postId, comment);
 		} catch (Exception e) {
 			LOG.error(e);

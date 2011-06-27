@@ -18,5 +18,11 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsoup-1.5.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr107cache-1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.6.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/sne11ius/src/libs/commons-lang-2.6/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-io-2.0.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
