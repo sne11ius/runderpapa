@@ -4,5 +4,6 @@ war/WEB-INF/deploy
 war/gxt
 war/runderpapa/*.gwt.rpc
 war/runderpapa/*cache*
+war/WEB-INF/lib/RunderPapa.jar
 RunderPapa.war
 .gwt

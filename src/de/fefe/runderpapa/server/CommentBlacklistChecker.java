@@ -25,17 +25,17 @@ public class CommentBlacklistChecker {
 		if (null == comment.getUsername() || null == comment.getComment()) {
 			return false;
 		}		
-		final String username = comment.getUsername().trim();
-		final String commentString = preformatComment(comment.getComment());
+		final String username = comment.getUsername().trim().toLowerCase();
+		final String commentString = preformatComment(comment.getComment()).toLowerCase();
 
 		for (String entry : getBlacklist()) {
-			if (StringUtils.getLevenshteinDistance(username, entry) < MIN_STRING_DISTANCE) {
-				LOG.info("Username `" + username + "' is blacklisted because of `" + entry + "'.");
+			if (StringUtils.getLevenshteinDistance(username, entry.toLowerCase()) < MIN_STRING_DISTANCE) {
+				LOG.info("Username `" + username + "' is blacklisted because of `" + entry.toLowerCase() + "'.");
 				return false;
 			}
 			for (String word : Arrays.asList(commentString.split("\\s"))) {
-				if (StringUtils.getLevenshteinDistance(word.trim(), entry) < MIN_STRING_DISTANCE) {
-					LOG.info("Word `" + word.trim() + "' in comment is blacklisted because of `" + entry + "'.");
+				if (StringUtils.getLevenshteinDistance(word.trim(), entry.toLowerCase()) < MIN_STRING_DISTANCE) {
+					LOG.info("Word `" + word.trim() + "' in comment is blacklisted because of `" + entry.toLowerCase() + "'.");
 					return false;
 				}
 			}
