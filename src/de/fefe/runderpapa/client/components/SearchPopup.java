@@ -57,7 +57,7 @@ public class SearchPopup extends Popup {
 		content.setHeight(HEIGHT_SEARCHING - 55);
 		setSize(WIDTH, HEIGHT_SEARCHING);
 		layout();
-		blogPostService.searchPost(text, new AsyncCallback<List<Integer>>() {
+		blogPostService.searchPosts(text, new AsyncCallback<List<Integer>>() {
 			
 			@Override
 			public void onSuccess(List<Integer> postsIds) {

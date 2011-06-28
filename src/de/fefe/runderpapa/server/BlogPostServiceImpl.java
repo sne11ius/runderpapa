@@ -39,6 +39,7 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 
 	@Override
 	public void addComment(int postId, BlogPostComment comment) {
+		logAddComment(postId, comment);
 		try {
 			if (!CommentBlacklistChecker.isCommentAllowed(comment)) {
 				return;
@@ -50,7 +51,8 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 	}
 
 	@Override
-	public List<Integer> searchPost(String text) throws IOException {
+	public List<Integer> searchPosts(String text) throws IOException {
+		logSearchPosts(text);
 		List<Integer> result = new LinkedList<Integer>();
 		List<BlogPost> allPosts = new FetteMamaScraper().getBlogPosts();
 		
@@ -61,5 +63,15 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 		}
 		
 		return result;
+	}
+	
+	private void logAddComment(int postId, BlogPostComment comment) {
+		String remoteAddress = getThreadLocalRequest().getRemoteAddr();
+		LOG.info("User `" + comment.getUsername() + "' (from " + remoteAddress + ") wants to comment on post #" + postId + ". Comment: `" + comment.getComment() + "'");
+	}
+
+	private void logSearchPosts(String text) {
+		String remoteAddress = getThreadLocalRequest().getRemoteAddr();
+		LOG.info(remoteAddress + " is searching for `" + text + "'");
 	}
 }

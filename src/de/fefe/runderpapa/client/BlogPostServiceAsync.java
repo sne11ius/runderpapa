@@ -17,6 +17,6 @@ public interface BlogPostServiceAsync {
 
 	void getMaxPostId(AsyncCallback<Integer> callback);
 
-	void searchPost(String text, AsyncCallback<List<Integer>> callback);
+	void searchPosts(String text, AsyncCallback<List<Integer>> callback);
 	
 }

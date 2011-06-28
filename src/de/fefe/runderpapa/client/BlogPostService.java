@@ -20,7 +20,7 @@ public interface BlogPostService extends RemoteService {
 	List<BlogPost> getPosts() throws IllegalArgumentException, IOException;
 	BlogPost getPost(int index) throws IOException;
 	
-	List<Integer> searchPost(String text) throws IOException;
+	List<Integer> searchPosts(String text) throws IOException;
 	
 	void addComment(int postId, BlogPostComment comment);
 	
