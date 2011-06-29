@@ -1,6 +1,10 @@
 package de.fefe.runderpapa.server;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +24,7 @@ import de.fefe.runderpapa.shared.BlogPostComment;
 public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPostService {
 	
 	private static final Log LOG = LogFactory.getLog(BlogPostServiceImpl.class);
+	private static final String BLACKLIST_INIT_PARAM_NAME = "blacklistFilename";
 
 
 	@Override
@@ -41,7 +46,7 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 	public void addComment(int postId, BlogPostComment comment) {
 		logAddComment(postId, comment);
 		try {
-			if (!CommentBlacklistChecker.isCommentAllowed(comment)) {
+			if (!CommentBlacklistChecker.isCommentAllowed(openBlacklist(), comment)) {
 				return;
 			}
 			new FetteMamaTelnetClient().addComment(postId, comment);
@@ -63,6 +68,11 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 		}
 		
 		return result;
+	}
+	
+	private InputStream openBlacklist() throws FileNotFoundException {
+		File blacklistFile = new File(getServletContext().getInitParameter(BLACKLIST_INIT_PARAM_NAME));
+		return new FileInputStream(blacklistFile);
 	}
 	
 	private void logAddComment(int postId, BlogPostComment comment) {

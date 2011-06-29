@@ -17,18 +17,18 @@ public class CommentBlacklistChecker {
 	
 	private static final Log LOG = LogFactory.getLog(CommentBlacklistChecker.class);
 	
-	private static final String BLACKLIST_FILENAME = "blacklist";
+	//private static final String BLACKLIST_FILENAME = "blacklist";
 	private static final int MIN_STRING_DISTANCE = 2;
 	private static final String PREFORMAT_REGEX = "[^\\w \\xC0-\\xFF]";
 	
-	public static boolean isCommentAllowed(final BlogPostComment comment) throws IOException {
+	public static boolean isCommentAllowed(InputStream blacklistFile, final BlogPostComment comment) throws IOException {
 		if (null == comment.getUsername() || null == comment.getComment()) {
 			return false;
 		}		
 		final String username = comment.getUsername().trim().toLowerCase();
 		final String commentString = preformatComment(comment.getComment()).toLowerCase();
 
-		for (String entry : getBlacklist()) {
+		for (String entry : getBlacklist(blacklistFile)) {
 			if (StringUtils.getLevenshteinDistance(username, entry.toLowerCase()) < MIN_STRING_DISTANCE) {
 				LOG.info("Username `" + username + "' is blacklisted because of `" + entry.toLowerCase() + "'.");
 				return false;
@@ -48,11 +48,10 @@ public class CommentBlacklistChecker {
 		return comment.replaceAll(PREFORMAT_REGEX, " ");
 	}
 	
-	private static List<String> getBlacklist() throws IOException {
-		LOG.info("Loading blacklist...");
-		InputStream blacklistStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(BLACKLIST_FILENAME);
+	private static List<String> getBlacklist(InputStream blacklistStream) throws IOException {
 		StringWriter writer = new StringWriter();
 		IOUtils.copy(blacklistStream, writer);
 		return Arrays.asList(writer.toString().split("\\s"));
 	}
+
 }

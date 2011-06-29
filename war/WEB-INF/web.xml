@@ -5,6 +5,14 @@
 
 <web-app>
   
+  <!-- guess what? location of the blacklist.
+       consider making that file readable somehow for the webserver
+  -->
+  <context-param>
+    <param-name>blacklistFilename</param-name>
+    <param-value>/etc/runderpapa/blacklist</param-value>
+  </context-param>
+  
   <!-- Servlets -->
   <servlet>
     <servlet-name>BlogPostService</servlet-name>
