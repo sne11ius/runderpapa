@@ -5,17 +5,17 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.HTML;
 
 import de.fefe.runderpapa.client.BlogPostServiceAsync;
 
 public class IntroPanel extends ContentPanel {
 
-
 	public IntroPanel(int numPosts, BlogPostServiceAsync blogPostService) {
 		final SearchPopup searchPopup = new SearchPopup(blogPostService);
+		final BlacklistEditor blacklistEditor = new BlacklistEditor();
 		setHeaderVisible(false);
+		setButtonAlign(HorizontalAlignment.LEFT);
 
 		add(new HTML("<center><b><a href=\"http://fettemama.org\">fettemama.org</a></b> wrapped in cozy gxt. " +
 				"Showing the <strong>" + numPosts + " newest</strong> posts. " +
@@ -32,12 +32,22 @@ public class IntroPanel extends ContentPanel {
 				}
 			}
 		});
-		setButtonAlign(HorizontalAlignment.LEFT);
 		addButton(searchPopupButton);
-	}
-	
-	@Override
-	protected void onRender(Element parent, int pos) {
-		super.onRender(parent, pos);
+		
+		final ToggleButton editBlacklistPopupButton = new ToggleButton("Blacklist bearbeiten");
+		editBlacklistPopupButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (editBlacklistPopupButton.isPressed()) {
+					blacklistEditor.activate();
+				} else {
+					if (blacklistEditor.isVisible()) {
+						blacklistEditor.hide();
+					}
+				}
+			}
+		});
+		addButton(editBlacklistPopupButton);
+		blacklistEditor.setToggleButton(editBlacklistPopupButton);
 	}
 }

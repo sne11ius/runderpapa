@@ -13,15 +13,31 @@
     <param-value>/etc/runderpapa/blacklist</param-value>
   </context-param>
   
+  <context-param>
+    <param-name>passwordsFilename</param-name>
+    <param-value>/etc/runderpapa/passwords</param-value>
+  </context-param>
+  
   <!-- Servlets -->
   <servlet>
     <servlet-name>BlogPostService</servlet-name>
     <servlet-class>de.fefe.runderpapa.server.BlogPostServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>BlacklistService</servlet-name>
+    <servlet-class>de.fefe.runderpapa.server.BlacklistServiceImpl</servlet-class>
+  </servlet>
+  
+  <!-- Mappings -->
   <servlet-mapping>
     <servlet-name>BlogPostService</servlet-name>
     <url-pattern>/runderpapa/BlogPostService</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>BlacklistService</servlet-name>
+    <url-pattern>/runderpapa/BlacklistService</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

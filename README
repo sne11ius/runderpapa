@@ -1,6 +1,7 @@
 runderpapa: gxt-wrapper for fettemama.org
 
 updates:
+2011-07-03: web20 edition: online blacklist editor
 2011-06-28: basic tracking
 2011-06-27: now mit blacklist(tm)
 
@@ -10,7 +11,7 @@ how to get it running for dummies:
  - import this project into the workspace of your choice
  - fix the project setup (maybe some absolute dirs are referenced)
  - run the shit
- - don't worry if it takes ages to load. its java+google :)
+ - don't worry if it takes ages to load. its java :)
  
  build this shit:
  - run gwt compile

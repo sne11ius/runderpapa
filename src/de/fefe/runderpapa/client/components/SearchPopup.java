@@ -28,12 +28,12 @@ public class SearchPopup extends Popup {
 	private static final VerticalPanel content = new VerticalPanel();
 
 	public SearchPopup(BlogPostServiceAsync blogPostService) {
+		this.blogPostService = blogPostService;
+
 		setStyleAttribute("background-color", "#DFE8F6");
 		add(new SearchPanel(this));
 		content.setScrollMode(Scroll.AUTO);
 		add(content, new BorderLayoutData(LayoutRegion.CENTER));
-		
-		this.blogPostService = blogPostService;
 		
 		setSize(WIDTH, HEIGHT_SMALL);
 		setBorders(true);
