@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 
 import de.fefe.runderpapa.shared.BlogPost;
 import de.fefe.runderpapa.shared.BlogPostComment;
+import de.fefe.runderpapa.shared.exceptions.PageScrapingException;
 
 public class FetteMamaScraper {
 	
@@ -28,14 +29,19 @@ public class FetteMamaScraper {
 	
 	private static final String ATTRIBUTE_HREF = "href";
 
-	public int getMaxPostId() throws MalformedURLException, IOException {
+	public int getMaxPostId() throws MalformedURLException, IOException, PageScrapingException {
 		Document mainPage = Jsoup.parse(new URL(URL), TIMEOUT);
-		String href = mainPage.getElementsByTag(TAG_LINK).get(3).attr(ATTRIBUTE_HREF);
+		for (Element element : mainPage.getElementsByTag(TAG_LINK)) {
+			if (element.attr(ATTRIBUTE_HREF).contains("=")) {
+				String href = element.attr(ATTRIBUTE_HREF);
+				return Integer.parseInt(href.substring(href.indexOf("=") + 1)); 
+			}
+		}
 		
-		return Integer.parseInt(href.substring(href.indexOf("=") + 1));
+		throw new PageScrapingException("I failed @ finding link with maxPostId :(");
 	}
 	
-	public List<BlogPost> getBlogPosts() throws MalformedURLException, IOException {
+	public List<BlogPost> getBlogPosts() throws MalformedURLException, IOException, PageScrapingException {
 		List<BlogPost> posts = new LinkedList<BlogPost>();
 		for (int postId = getMaxPostId(); postId > 0; --postId) {
 			posts.add(getBlogPost(postId));

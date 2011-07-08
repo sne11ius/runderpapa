@@ -12,6 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.fefe.runderpapa.client.BlogPostService;
 import de.fefe.runderpapa.shared.BlogPost;
 import de.fefe.runderpapa.shared.BlogPostComment;
+import de.fefe.runderpapa.shared.exceptions.PageScrapingException;
 
 /**
  * Teh service.
@@ -22,12 +23,12 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 	private static final Log LOG = LogFactory.getLog(BlogPostServiceImpl.class);
 
 	@Override
-	public int getMaxPostId() throws IOException {
+	public int getMaxPostId() throws IOException, PageScrapingException {
 		return new FetteMamaScraper().getMaxPostId();
 	}
 
 	@Override
-	public List<BlogPost> getPosts() throws IOException {
+	public List<BlogPost> getPosts() throws IOException, PageScrapingException {
 		return new FetteMamaScraper().getBlogPosts();
 	}
 
@@ -50,7 +51,7 @@ public class BlogPostServiceImpl extends RemoteServiceServlet implements BlogPos
 	}
 
 	@Override
-	public List<Integer> searchPosts(String text) throws IOException {
+	public List<Integer> searchPosts(String text) throws IOException, PageScrapingException {
 		logSearchPosts(text);
 		List<Integer> result = new LinkedList<Integer>();
 		List<BlogPost> allPosts = new FetteMamaScraper().getBlogPosts();
